@@ -4,11 +4,15 @@
  * Created: 5/11/2021 13:49:28
  * Author : blue
  */ 
-
+#define  F_CPU 3686400L
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 
 void update_portc(void);
+void sendChar(unsigned char byte);
+
+unsigned char previous_pina_state = 0;
 
 int main(void)
 {
@@ -40,15 +44,34 @@ int main(void)
 	UCSR0B |= ((1 << RXEN0) | (1 << TXEN0));
 	//	enable GIE
 	sei();
-	
+	unsigned char data = 0;
+
    
     while (1) 
     {
+		if(previous_pina_state != PINA){
+			PORTC ^= (PINA & 0xFF);//	extract the bits that are 1 and toggle those outputs
+			sendChar(PORTC);
+			while(PINA & 0xFF);	//	wait till we release the buttons, we dont want to send it again
+			previous_pina_state = PINA;
+			_delay_ms(5);	//	stupid bouncing
+		}
     }
 }
 
 void update_portc(void){
 	PORTC = PINA;
+}
+
+void sendChar(unsigned char byte){
+	while(!(UCSR0A & (1 << UDRE0))){
+		
+	}
+	UDR0 = byte;
+}
+
+ISR(USART0_RX_vect){
+	
 }
 
 

@@ -173,7 +173,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x15e
+.text           0x00000000      0x194
  *(.vectors)
  .vectors       0x00000000       0x7c D:/atmel/AVR-STUDIO-7.0_test/AVR-STUDIO-7.0/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega324p/avr5/crtatmega324p.o
                 0x00000000                __vector_default
@@ -268,13 +268,13 @@ END GROUP
  .text.main     0x000000b2       0x94 main.o
                 0x000000b2                main
  .text.__vector_20
-                0x00000146       0x14 main.o
+                0x00000146       0x4a main.o
                 0x00000146                __vector_20
-                0x0000015a                . = ALIGN (0x2)
+                0x00000190                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000015a        0x0 d:/atmel/avr-studio-7.0_test/avr-studio-7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000015a                _exit
-                0x0000015a                exit
+ .fini9         0x00000190        0x0 d:/atmel/avr-studio-7.0_test/avr-studio-7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000190                _exit
+                0x00000190                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -293,11 +293,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000015a        0x4 d:/atmel/avr-studio-7.0_test/avr-studio-7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000190        0x4 d:/atmel/avr-studio-7.0_test/avr-studio-7.0/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000015e                _etext = .
+                0x00000194                _etext = .
 
-.data           0x00800100        0x0 load address 0x0000015e
+.data           0x00800100        0x0 load address 0x00000194
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -309,23 +309,26 @@ END GROUP
                 0x00800100                _edata = .
                 [!provide]                PROVIDE (__data_end, .)
 
-.bss            0x00800100        0x1
+.bss            0x00800100        0x2
                 0x00800100                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.previous_pina_state
                 0x00800100        0x1 main.o
                 0x00800100                previous_pina_state
+ .bss.recv_buffer
+                0x00800101        0x1 main.o
+                0x00800101                recv_buffer
  *(COMMON)
-                0x00800101                PROVIDE (__bss_end, .)
-                0x0000015e                __data_load_start = LOADADDR (.data)
-                0x0000015e                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800102                PROVIDE (__bss_end, .)
+                0x00000194                __data_load_start = LOADADDR (.data)
+                0x00000194                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800101        0x0
+.noinit         0x00800102        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800101                _end = .
+                0x00800102                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -398,34 +401,34 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x863
+.debug_info     0x00000000      0x869
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x6cc D:/atmel/AVR-STUDIO-7.0_test/AVR-STUDIO-7.0/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega324p/avr5/crtatmega324p.o
- .debug_info    0x000006cc      0x197 main.o
+ .debug_info    0x000006cc      0x19d main.o
 
-.debug_abbrev   0x00000000      0x7bb
+.debug_abbrev   0x00000000      0x7ac
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x66e D:/atmel/AVR-STUDIO-7.0_test/AVR-STUDIO-7.0/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega324p/avr5/crtatmega324p.o
- .debug_abbrev  0x0000066e      0x14d main.o
+ .debug_abbrev  0x0000066e      0x13e main.o
 
-.debug_line     0x00000000      0x336
+.debug_line     0x00000000      0x343
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x152 D:/atmel/AVR-STUDIO-7.0_test/AVR-STUDIO-7.0/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega324p/avr5/crtatmega324p.o
- .debug_line    0x00000152      0x1e4 main.o
+ .debug_line    0x00000152      0x1f1 main.o
 
-.debug_frame    0x00000000       0x60
+.debug_frame    0x00000000       0x74
  *(.debug_frame)
- .debug_frame   0x00000000       0x60 main.o
+ .debug_frame   0x00000000       0x74 main.o
 
-.debug_str      0x00000000      0x418
+.debug_str      0x00000000      0x41f
  *(.debug_str)
  .debug_str     0x00000000      0x255 D:/atmel/AVR-STUDIO-7.0_test/AVR-STUDIO-7.0/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega324p/avr5/crtatmega324p.o
- .debug_str     0x00000255      0x1c3 main.o
-                                0x1f7 (size before relaxing)
+ .debug_str     0x00000255      0x1ca main.o
+                                0x1fe (size before relaxing)
 
-.debug_loc      0x00000000       0x2f
+.debug_loc      0x00000000       0x63
  *(.debug_loc)
- .debug_loc     0x00000000       0x2f main.o
+ .debug_loc     0x00000000       0x63 main.o
 
 .debug_macinfo
  *(.debug_macinfo)

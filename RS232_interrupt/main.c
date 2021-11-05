@@ -12,6 +12,7 @@
 void update_portc(void);
 void sendChar(unsigned char byte);
 
+unsigned char recv_buffer = 0;
 unsigned char previous_pina_state = 0;
 
 int main(void)
@@ -44,11 +45,12 @@ int main(void)
 	UCSR0B |= ((1 << RXEN0) | (1 << TXEN0));
 	//	enable GIE
 	sei();
-	unsigned char data = 0;
+	
 
    
     while (1) 
     {
+		
 		if(previous_pina_state != PINA){
 			PORTC ^= (PINA & 0xFF);//	extract the bits that are 1 and toggle those outputs
 			sendChar(PORTC);
@@ -56,6 +58,7 @@ int main(void)
 			previous_pina_state = PINA;
 			_delay_ms(5);	//	stupid bouncing
 		}
+		
     }
 }
 
@@ -64,14 +67,13 @@ void update_portc(void){
 }
 
 void sendChar(unsigned char byte){
-	while(!(UCSR0A & (1 << UDRE0))){
-		
-	}
+	while(!(UCSR0A & (1 << UDRE0)));
 	UDR0 = byte;
 }
 
 ISR(USART0_RX_vect){
-	
+	recv_buffer = UDR0;
+	PORTC ^= (2 << (recv_buffer)) / 2;
 }
 
 
